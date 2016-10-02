@@ -1,0 +1,25 @@
+{
+  "name": "REST-API-Express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baconYao/REST-API-Express.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/baconYao/REST-API-Express/issues"
+  },
+  "homepage": "https://github.com/baconYao/REST-API-Express#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.13.4",
+    "morgan": "^1.7.0"
+  }
+}
