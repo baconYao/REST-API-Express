@@ -4,7 +4,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 
-
 var routes = require('./route.js');
 
 
@@ -14,6 +13,36 @@ var app = express();
 app.use(logger('dev'));
 // 載入解析json的中介軟體
 app.use(bodyParser.json());
+
+var mongoose = require('mongoose');
+
+// qa is db name
+mongoose.connect("mongodb://localhost:27017/qa");
+
+var db = mongoose.connection;
+
+db.on("error", function(err){
+    console.log("connection error: ", err);
+});
+
+db.once("open", function(){
+    console.log("db connection successful");
+});
+
+app.use(function(req , res, next){
+    // restrict domains which the API can response to
+    // This case means ti's ok to make request to this API from any domain
+    res.header("Access-Control-Allow-Origin", "*");
+    // field name tells the client which headers are permitted in their request
+    res.header("Access-Control-Allow-Headers", "Orign, X-Requested-With, Content-Type, Accept");
+    // pre-flight requests come in with the http method called options
+    if(req.method === "OPTIONS")
+    {   
+        res.header("Access-Control-Allow-Methods", "PUT,POST,DELETE");
+        return res.status(200).jsonP({});
+    }
+    next()
+});
 
 // 路由控制
 app.use('/questions', routes);

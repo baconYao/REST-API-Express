@@ -4,7 +4,7 @@
 var mongoose = require("mongoose");
 
 
-// sand box is db name
+// sandbox is db name
 mongoose.connect("mongodb://localhost:27017/sandbox");
 
 var db = mongoose.connection;
@@ -43,8 +43,8 @@ db.once("open", function(){
         next();
     });
 
-    // A static method can be called by a model
-    // An instance method can be called by a document
+    // A static method can be called by a model object
+    // An instance method can be called by a document object
     AnimalSchema.statics.findSize = function(size, callback){
         // this == Animal
         return this.find({size: size}, callback);
